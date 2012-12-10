@@ -5,7 +5,7 @@
  * GITHUB REPO  : https://github.com/simoncorry/jquery.modal
  * AUTHORED BY  : Simon Corry, http://simoncorry.com
  * VERSION      : 1.0
- * UPDATED      : October 4th, 2012
+ * UPDATED      : December 10th, 2012
  *
  * Moomba Modal is an animated modal box. Please feel free to email
  * questions or use case examples to labs@simoncorry.com.
@@ -64,7 +64,7 @@
             head.append('<style type="text/css"> \ @media only screen \ and (max-width : ' + mobile + ') { \ .modal { \ width:560px !important; \ margin-left:-280px !important; \ } \ } \ @media only screen \ and (max-width : 639px) { \ .modal { \ width:300px !important; \ margin-left:-150px !important; \ } .modal_header h3 { \ font-size:20px; \ text-align:left; \ width:200px; \ margin:0 0 0 20px; \ } \ } \</style>');
           };
           if (mobile_width < 639) {
-            head.append('<style type="text/css"> \ @media only screen \ and (max-width : ' + mobile + ') { \ .modal { \ width:300px !important; \ margin-left:-150px !important; \ } .modal_header h3 { \ font-size:20px; \ text-align:left; \ width:200px; \ margin:0 0 0 20px; \ } \ } \</style>');
+            head.append('<style type="text/css"> \ @media only screen \ and (max-width : ' + mobile + ') { \ .modal { \ width:300px !important; \ margin-left:-150px !important; \ } .modal_header h3 { \ /* font-size:20px; */ \ text-align:left; \ width:200px; \ margin:0 0 0 20px; \ } \ } \</style>');
           };
         };
         
@@ -87,7 +87,7 @@
           var modal_name    = $(this).data('modal');
           var modal_id      = $('#'+modal_name);
           var modal_bg	    = $('.modal_bg');
-          var modal_bg_hide	= $('.modal_hide, .modal_bg');
+          var modal_bg_hide	= $('.modal_hide, .modal_bg, .modal_extra_hide');
           
           // Adjust Centering
           var modal_width  = modal_id.outerWidth() / 2;
@@ -102,6 +102,9 @@
           // Adjust body height
           body.css('height', (modal_height + window_height) + 'px');
           
+          // Add Active Class
+          $(this).addClass('modal_active');
+          
           // Show Modal
           modal_bg.addClass('visible'),
           modal_id.addClass('visible')
@@ -113,7 +116,8 @@
             modal.removeClass('visible'),
             setTimeout(function() {
               modal_bg.removeClass('visible'),
-              body.css('height','auto');  	
+              body.css('height','auto'),
+              $('.modal_show').removeClass('modal_active');  	
             }, 700);			
           });
         });   
